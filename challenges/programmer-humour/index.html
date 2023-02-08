@@ -1,0 +1,41 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Humour is alive in programmers</title>
+    <style>
+        body {
+            display: flex;
+            background-color: darkgray;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;;
+
+        }
+    </style>
+</head>
+<body>
+    
+
+    <script>
+        async function humorData() {
+            try {
+                const dataReply = await fetch ('https://xkcd.now.sh/?comic=latest');
+                const dataReceived = await dataReply.json()
+                console.log (dataReceived)
+                return dataReceived.img
+            } catch (error){
+                error
+            }
+        }
+
+        async function getImage() {
+            const newImage = document.createElement('img')
+            newImage.src =await humorData()
+            document.body.appendChild(newImage)
+        }
+        getImage()
+    </script>
+</body>
+</html>

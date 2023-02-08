@@ -1,0 +1,64 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doggie Dog Photos</title>
+    <style>
+    body {
+        background-color:silver;
+    }    
+    img{
+        width: 300px;
+        height: 300px;
+    }
+    ul{
+        list-style: none;
+        display: flex;
+        flex-wrap: wrap;
+        gap:0.5rem;
+    }
+    li{
+        border: 1px solid black;
+        box-shadow: 5px 5px black;
+    }
+    button{
+        padding: 1rem 0.5rem;
+        border-radius: .5rem;
+        margin-top:1rem ;
+        
+    }
+    </style>
+</head>
+<body>
+ <button id="btnDog">
+    Add another Doggie
+ </button>   
+ <ul id="dogList"></ul>
+
+ <script>
+async function getDogImage () {
+    try {
+        const result = await
+        fetch ('https://dog.ceo/api/breeds/image/random')
+        const timeNeeded = await result.json()
+        return timeNeeded.message
+    } catch (error) {
+        return error
+    }
+}
+ const button = document.getElementById('btnDog');
+ button.addEventListener('click' , async() => {
+    const list = document.getElementById('dogList');
+
+    const nextDog = document.createElement('li');
+    list.appendChild(nextDog);
+
+    const nextImage = document.createElement('img');
+    const imgUrl = await getDogImage();
+    nextImage.src = imgUrl;
+    list.appendChild(nextImage);
+ })
+ </script>
+</body>
+</html>
